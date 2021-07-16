@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-07-16T15:01:21Z</date>
+    <groups>
+        <group>
+            <name>arduino</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>arduino_battary_16</template>
+            <name>arduino_battary_16</name>
+            <groups>
+                <group>
+                    <name>arduino</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>Arduino</name>
+                    <type>HTTP_AGENT</type>
+                    <key>arduino</key>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <url>http://{HOST.IP}/</url>
+                </item>
+                <item>
+                    <name>Arduino-DHT-Hum</name>
+                    <type>DEPENDENT</type>
+                    <key>DHT-hum</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>H = .*
+\0</params>
+                        </step>
+                        <step>
+                            <type>LTRIM</type>
+                            <params>H = </params>
+                        </step>
+                        <step>
+                            <type>RTRIM</type>
+                            <params> %&lt;br&gt;</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params> %&lt;br&gt;
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Arduino-DHT-temp</name>
+                    <type>DEPENDENT</type>
+                    <key>DHT-temp</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>T = .*
+\0</params>
+                        </step>
+                        <step>
+                            <type>LTRIM</type>
+                            <params>T =</params>
+                        </step>
+                        <step>
+                            <type>RTRIM</type>
+                            <params> C&lt;br&gt;</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params> C&lt;br&gt;
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Modul 1</name>
+                    <type>DEPENDENT</type>
+                    <key>modul1</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 1 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 1 is 
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 1 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul1_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul1,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 2</name>
+                    <type>DEPENDENT</type>
+                    <key>modul2</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 2 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 2 is 
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 2 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul2_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul2,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 3</name>
+                    <type>DEPENDENT</type>
+                    <key>modul3</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 3 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 3 is 
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 3 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul3_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul3,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 4</name>
+                    <type>DEPENDENT</type>
+                    <key>modul4</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 4 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 4 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 4 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul4_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul4,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 5</name>
+                    <type>DEPENDENT</type>
+                    <key>modul5</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 5 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 5 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 5 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul5_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul5,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 6</name>
+                    <type>DEPENDENT</type>
+                    <key>modul6</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 6 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 6 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 6 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul6_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul6,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 7</name>
+                    <type>DEPENDENT</type>
+                    <key>modul7</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 7 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 7 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 7 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul7_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul7,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 8</name>
+                    <type>DEPENDENT</type>
+                    <key>modul8</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 8 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 8 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 8 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul8_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul8,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 9</name>
+                    <type>DEPENDENT</type>
+                    <key>modul9</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 9 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 9 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 9 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul9_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul9,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 10</name>
+                    <type>DEPENDENT</type>
+                    <key>modul10</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 10 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 10 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 10 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul10_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul10,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 11</name>
+                    <type>DEPENDENT</type>
+                    <key>modul11</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 11 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 11 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 11 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul11_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul11,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 12</name>
+                    <type>DEPENDENT</type>
+                    <key>modul12</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 12 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 12 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 12 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul12_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul12,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 13</name>
+                    <type>DEPENDENT</type>
+                    <key>modul13</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 13 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 13 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 13 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul13_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul13,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 14</name>
+                    <type>DEPENDENT</type>
+                    <key>modul14</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 14 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 14 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 14 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul14_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul14,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 15</name>
+                    <type>DEPENDENT</type>
+                    <key>modul15</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 15 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 15 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 15 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul15_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul15,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>Modul 16</name>
+                    <type>DEPENDENT</type>
+                    <key>modul16</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Modul 16 is *.....
+\0</params>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <params>Modul 16 is
+</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>arduino</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Volt modul 16 future 30m</name>
+                    <type>CALCULATED</type>
+                    <key>modul16_future_30m</key>
+                    <value_type>FLOAT</value_type>
+                    <units>Volt</units>
+                    <params>forecast(modul16,900,,1800,exponential)</params>
+                </item>
+                <item>
+                    <name>volt_total_1</name>
+                    <type>CALCULATED</type>
+                    <key>volt_total_1</key>
+                    <value_type>FLOAT</value_type>
+                    <params>last(&quot;modul1&quot;)+last(&quot;modul2&quot;)+last(&quot;modul3&quot;)+last(&quot;modul4&quot;)</params>
+                </item>
+                <item>
+                    <name>volt_total_2</name>
+                    <type>CALCULATED</type>
+                    <key>volt_total_2</key>
+                    <value_type>FLOAT</value_type>
+                    <params>last(&quot;modul5&quot;)+last(&quot;modul6&quot;)+last(&quot;modul7&quot;)+last(&quot;modul8&quot;)</params>
+                </item>
+                <item>
+                    <name>volt_total_3</name>
+                    <type>CALCULATED</type>
+                    <key>volt_total_3</key>
+                    <value_type>FLOAT</value_type>
+                    <params>last(&quot;modul9&quot;)+last(&quot;modul10&quot;)+last(&quot;modul11&quot;)+last(&quot;modul12&quot;)</params>
+                </item>
+                <item>
+                    <name>volt_total_4</name>
+                    <type>CALCULATED</type>
+                    <key>volt_total_4</key>
+                    <value_type>FLOAT</value_type>
+                    <params>last(&quot;modul13&quot;)+last(&quot;modul14&quot;)+last(&quot;modul15&quot;)+last(&quot;modul16&quot;)</params>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Volt modul 1</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul1</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul1_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 2</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul2</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul2_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 3</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul3</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul3_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 4</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul4</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul4_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 5</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul5</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul5_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 6</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul6</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul6_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 7</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul7</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul7_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 8</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul8</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul8_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 9</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul9</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul9_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 10</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul10</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul10_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 11</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul11</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul11_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 12</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul12</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul12_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 13</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul13</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul13_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 14</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul14</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul14_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 15</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul15</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul15_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Volt modul 16</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul16</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul16_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Влажность</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>DHT-hum</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Температура</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>DHT-temp</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>общий вольтаж</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul1</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul2</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>AC8C14</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul3</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>611F27</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul4</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>F230E0</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul5</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>5CCD18</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul6</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>BB2A02</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul7</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>8</sortorder>
+                    <color>5A2B57</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul8</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>9</sortorder>
+                    <color>89ABF8</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul9</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>10</sortorder>
+                    <color>7EC25C</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul10</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>11</sortorder>
+                    <color>274482</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul11</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>12</sortorder>
+                    <color>2B5429</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul12</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>13</sortorder>
+                    <color>8048B4</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul13</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>14</sortorder>
+                    <color>FD5434</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul14</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>15</sortorder>
+                    <color>790E1F</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul15</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>16</sortorder>
+                    <color>87AC4D</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul16</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>общий вольтаж future</name>
+            <yaxismax>14</yaxismax>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul1_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul2_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul3_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>A54F10</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul4_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul5_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul6_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>AC8C14</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul7_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>8</sortorder>
+                    <color>611F27</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul8_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>9</sortorder>
+                    <color>F230E0</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul9_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>10</sortorder>
+                    <color>5CCD18</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul10_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>11</sortorder>
+                    <color>5A2B57</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul11_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>12</sortorder>
+                    <color>BB2A02</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul12_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>13</sortorder>
+                    <color>89ABF8</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul13_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>14</sortorder>
+                    <color>7EC25C</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul14_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>15</sortorder>
+                    <color>274482</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul15_future_30m</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>16</sortorder>
+                    <color>2B5429</color>
+                    <item>
+                        <host>arduino_battary_16</host>
+                        <key>modul16_future_30m</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
