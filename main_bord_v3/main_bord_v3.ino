@@ -60,7 +60,7 @@ MyFlags flags;
 DHT dht(DHTPIN, DHTTYPE);   // инициализация сенсора DHT
 
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(21, 22); // RX, TX
+SoftwareSerial mySerial(9, 8); // RX, TX
 // сначала объявляем обработчик
 // это может почти быть любая интерфейсная либа,
 // например софтСериал на любой другой платформе
