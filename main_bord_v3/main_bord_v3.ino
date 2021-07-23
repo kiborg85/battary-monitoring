@@ -4,7 +4,7 @@
 // TX передатчика подключен к RX приёмника
 // RX передатчика подключен к TX приёмника
 // подключение библиотек
-#include "GyverWDT.h"
+//#include "GyverWDT.h"
 #include <avr/eeprom.h>
 #include <EEPROM.h>
 #define BTN_PIN A0        // кнопка подключена сюда (BTN_PIN --- КНОПКА --- GND)
@@ -60,7 +60,7 @@ MyFlags flags;
 DHT dht(DHTPIN, DHTTYPE);   // инициализация сенсора DHT
 
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(9, 8); // RX, TX
+SoftwareSerial mySerial(21, 22); // RX, TX
 // сначала объявляем обработчик
 // это может почти быть любая интерфейсная либа,
 // например софтСериал на любой другой платформе
@@ -79,7 +79,12 @@ GBUS bus(&mySerial, 200, 5);
 }; */
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 void setup() {
-  Watchdog.enable(RESET_MODE, WDT_PRESCALER_1024); // Режим сторжевого сброса , таймаут ~8с
+  if (devises > 32) {
+    eeprom_write_byte(20, 1);
+    devises = eeprom_read_byte(20);     //перечитываем из ЕЕПРОМ количество девайсов
+  }
+
+//  Watchdog.enable(RESET_MODE, WDT_PRESCALER_1024); // Режим сторжевого сброса , таймаут ~8с
    flags.flagProg = LOW;
 //   flags.all = LOW;
    flags.ProgBlinck = 1;    //для блинка при программировании
@@ -469,7 +474,7 @@ void loop() {
 //    Serial.println("client disconnected");
   }
   
-Watchdog.reset(); // Переодический сброс watchdog, означающий, что устройство не зависло
+//Watchdog.reset(); // Переодический сброс watchdog, означающий, что устройство не зависло
  }
 
 /*
@@ -509,8 +514,8 @@ void ethernet() {
 ////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
 ////      lcd.print("Failed Ethernet");  //Serial.println("Failed to configure Ethernet using DHCP");
     if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
-      lcd.print("No hardware Ethernet");  //Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
+//      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
+//      lcd.print("No hardware Ethernet");  //Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
     } else if (Ethernet.linkStatus() == LinkOFF) {
 ////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
 ////      lcd.print("No cable");  //Serial.println("Ethernet cable is not connected.");
@@ -544,6 +549,7 @@ void ethernet() {
   server.begin();
   Serial.print("server is at ");
   Serial.println(Ethernet.localIP());
+
   lcd.clear();
   lcd.setCursor(0, 0);  //  установка курсора в начало 1 строки
   lcd.print("I get IP adress");  // выводим текущий IP
@@ -552,7 +558,7 @@ void ethernet() {
 //  lcd.print("                ");  // выводим текущий IP
   lcd.setCursor(0, 1);  //  установка курсора в начало 1 строки
   lcd.print(Ethernet.localIP());  // выводим текущий IP
- // delay(2000);
+
  }
 
 void GenNewMAC() {
