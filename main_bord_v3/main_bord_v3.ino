@@ -488,62 +488,49 @@ void ethernet() {
   // start the Ethernet connection and the server:
   //  Ethernet.begin(mac, ip);
   Serial.println();
-  for(byte i=0;i<6;i++) {
-//    EEPROM.update(i,mac1[i]);
-    mac[i]=EEPROM[i];
+  for (byte i = 0; i < 6; i++) {
+    //    EEPROM.update(i,mac1[i]);
+    mac[i] = EEPROM[i];
     Serial.print(mac[i], HEX);
     if (i < 5) Serial.print('-');
   }
-//  
-//  byte mac[6] = {  0x00, 0x48, 0x5A, 0x0B, 0x04, 0x2E };
-
- // byte macBuffer[6];  // create a buffer to hold the MAC address
- // Ethernet.MACAddress(macBuffer); // fill the buffer
-//  Serial.print("The MAC address is: ");
-/*  for (byte octet = 0; octet < 6; octet++) {
-    Serial.print(macBuffer[octet], HEX);
-    if (octet < 5) {
-      Serial.print('-');
+  //set standart MAK
+  bool flagmak = 0;
+  for (byte i = 0; i < 6; i++) {
+    if (mac[i] = 255) {
+      byte mac[6] = {  0x00, 0x48, 0x5A, 0x0B, 0x04, 0x2E };
     }
-  } */
+  }
+  if (flagmak = 1) {
+    GenNewMAC();
+    delay (5000);
+    for (byte octet = 0; octet < 6; octet++) {
+      lcd.print(mac[octet], HEX);
+      EEPROM.update(octet, mac[octet]);
+    }
+    resetFunc(); //вызываем reset
+  }
+ 
+ 
   Serial.println();
   // Check for Ethernet hardware present
-    // start the Ethernet connection:
-//  Serial.println("Initialize Ethernet with DHCP:");
+  // start the Ethernet connection:
+  //  Serial.println("Initialize Ethernet with DHCP:");
   if (Ethernet.begin(mac) == 0) {
-////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
-////      lcd.print("Failed Ethernet");  //Serial.println("Failed to configure Ethernet using DHCP");
+    ////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
+    ////      lcd.print("Failed Ethernet");  //Serial.println("Failed to configure Ethernet using DHCP");
     if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-//      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
-//      lcd.print("No hardware Ethernet");  //Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
+      //      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
+      //      lcd.print("No hardware Ethernet");  //Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
     } else if (Ethernet.linkStatus() == LinkOFF) {
-////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
-////      lcd.print("No cable");  //Serial.println("Ethernet cable is not connected.");
+      ////      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
+      ////      lcd.print("No cable");  //Serial.println("Ethernet cable is not connected.");
     }
     // no point in carrying on, so do nothing forevermore:
     while (true) {
       delay(1);
     }
-  } 
-  // print your local IP address:
-//  Serial.print("My IP address: ");
-//  Serial.println(Ethernet.localIP());
-
-/*  if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-//    Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
-    while (true) {
-//      Serial.println("RESET MAC");
-//      GenNewMAC();
-      
-//      resetFunc(); //вызываем reset
-      delay(1); // do nothing, no point running without Ethernet hardware
-    }
-  } */
-/*  if (Ethernet.linkStatus() == LinkOFF) {
-      lcd.setCursor(0, 1);                              // установка курсора на начало первой строки
-      lcd.print("No cable");  //
-//    Serial.println("Ethernet cable is not connected.");
-  } */
+  }
 
   // start the server
   server.begin();
@@ -553,13 +540,13 @@ void ethernet() {
   lcd.clear();
   lcd.setCursor(0, 0);  //  установка курсора в начало 1 строки
   lcd.print("I get IP adress");  // выводим текущий IP
-  
-//  lcd.setCursor(0, 1);  //  установка курсора в начало 1 строки
-//  lcd.print("                ");  // выводим текущий IP
+
+  //  lcd.setCursor(0, 1);  //  установка курсора в начало 1 строки
+  //  lcd.print("                ");  // выводим текущий IP
   lcd.setCursor(0, 1);  //  установка курсора в начало 1 строки
   lcd.print(Ethernet.localIP());  // выводим текущий IP
 
- }
+}
 
 void GenNewMAC() {
        // No a locally managed address, generate random address and store it.
